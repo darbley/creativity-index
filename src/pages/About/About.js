@@ -1,12 +1,17 @@
 import React from 'react';
 import './style.scss';
 
+import Wrapper from '../../templates/Wrapper/Wrapper';
+import ContainerContent from '../../templates/ContainerContent/ContainerContent';
+
 class About extends React.Component {
     render() {
         return (
-            <div className="about">
-                <h1>About</h1>
-            </div>
+            <Wrapper pageCurrent="about">
+               <ContainerContent>
+                    <h1>About</h1>
+               </ContainerContent>
+            </Wrapper>
         )
     }
 }
