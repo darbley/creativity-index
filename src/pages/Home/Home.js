@@ -1,6 +1,5 @@
 import React from 'react';
 import './style.scss';
-
 import {LanguageConsumer,TranslatableText} from '../../providers/LanguageProvider';
 
 //import { LanguageConsumer } from ''
