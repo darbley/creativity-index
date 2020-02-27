@@ -1,0 +1,15 @@
+@import '../../assets/scss/partials/vars';
+
+ul.answer-options{
+    display: block;
+    list-style-type: none;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+
+    li{
+        margin: 5px 0;
+        text-align: left;
+    }
+
+}
