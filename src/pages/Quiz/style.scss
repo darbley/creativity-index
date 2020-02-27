@@ -1,0 +1,16 @@
+@import '../../assets/scss/partials/vars';
+
+.quiz {
+    .question-count{
+        display: block;
+        width: 40px; 
+        height: 40px;
+        padding: 5px;
+        margin: 0 auto;
+        border: 2px solid $rethink-blue;
+        border-radius: 25px;
+        line-height: 2.4;
+        color: $rethink-blue;
+        font-family: $baseFont;
+    }
+}

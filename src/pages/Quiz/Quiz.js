@@ -9,25 +9,52 @@ import Wrapper from '../../templates/Wrapper/Wrapper';
 import ContainerContent from '../../templates/ContainerContent/ContainerContent';
 
 import data from '../../data.json';
+import Question from '../../components/Question/Question';
+import AnswerOptions from '../../components/AnswerOptions/AnswerOptions';
 
 class Quiz extends React.Component {
-    state = {
+    state = { 
         startQuiz: false,
-        quizScore: '',
+        quizScore: 0,
         questions: data.questions,
-        questionCount: 0
+        questionCount: 0,
     }
 
     componentDidMount = () => {
-        console.log('state ',this.state)
+        console.log('state ',this.state.questions.length)
+
+        if(this.state.questions){
+            this.setState({
+                questionsTotal: this.state.questions.length
+            })
+        }
     }
 
+    onAnswerSelected = (event, key) => {
+        console.log('clicked on answer ',key);
+        // Increment questionCount
+        this.setState((prevState) => {
+            return {
+                questionCount: this.state.questionCount + 1
+            }
+        })
+        // Check to see if value of answer is correct
 
+        // If correct add to quizScore
+
+    }
+
+   
 
     render() {
         const { questions, questionCount } = this.state;
+        const question = questions[questionCount].question;
         const answers = Object.values(questions[questionCount].answers);
-        
+        /* const List = Object.entries(questions[questionCount].answers).map(([key,value])=>{
+            return (
+                <div>{key} : {value.toString()}</div>
+            )
+          }) */
         console.log('const ',questions);
         return (
             <Wrapper pageCurrent="home">
@@ -40,23 +67,15 @@ class Quiz extends React.Component {
                     </h1>
                </ContainerContent>
 
-               <ContainerContent>
-                   <h2>{`${questions[questionCount].question}`}</h2>
-                   <div>
-                       {
-                           answers.map( (answer, i) => {
-                               return (
-                                   <li key={i}>{answer}</li>
-                               )
-                           })
-                         
-                       }
-                       {
-                           Object.entries(questions[questionCount].answers).forEach(([key, value]) => {
-                               return <li>{key}</li>
-                           })
-                       }
-                   </div>
+               <ContainerContent addClass="quiz">
+                        <span>Question {(this.state.questionCount + 1)} of {this.state.questionsTotal}</span>
+                    <span className="question-count">{(this.state.questionCount + 1).toString()}</span>
+
+                    <Question content={question} />
+
+                    <AnswerOptions answers={questions[questionCount].answers} onAnswerSelected={this.onAnswerSelected} />
+                   
+
                </ContainerContent>
             </Wrapper>
         )
