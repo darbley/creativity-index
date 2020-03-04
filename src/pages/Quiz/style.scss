@@ -1,6 +1,6 @@
 @import '../../assets/scss/partials/vars';
 
-.quiz {
+.quiz-wrap {
     .question-count{
         display: block;
         width: 40px; 
@@ -14,3 +14,36 @@
         font-family: $baseFont;
     }
 }
+
+.transition-group{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.transition-wrap-enter {
+    opacity: 0;
+    
+    z-index: 2;
+  }
+  .transition-wrap-enter-active {
+    opacity: 1;
+    transition: opacity 500ms;
+  }
+  .transition-wrap-enter-done{
+      position: relative;
+  }
+  .transition-wrap-exit {
+    position: absolute;
+    opacity: 1;
+    z-index:1;
+    top: 0;
+  }
+  .transition-wrap-exit-active {
+    opacity: 0;
+    transition: opacity 500ms;
+  }
+  .transition-wrap-exit-done {
+    opacity: 0;
+     
+  }

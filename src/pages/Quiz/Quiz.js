@@ -1,13 +1,11 @@
 import React from 'react';
 import './style.scss';
 import {LanguageConsumer,TranslatableText} from '../../providers/LanguageProvider';
-
+import { CSSTransition, TransitionGroup, } from 'react-transition-group';
 //import { LanguageConsumer } from ''
 //import { TranslatableText } from ‘../providers/LanguageProvider’
-
 import Wrapper from '../../templates/Wrapper/Wrapper';
 import ContainerContent from '../../templates/ContainerContent/ContainerContent';
-
 import data from '../../data.json';
 import Question from '../../components/Question/Question';
 import AnswerOptions from '../../components/AnswerOptions/AnswerOptions';
@@ -57,25 +55,36 @@ class Quiz extends React.Component {
           }) */
         console.log('const ',questions);
         return (
-            <Wrapper pageCurrent="home">
-               <ContainerContent>
+            <Wrapper pageCurrent="quiz">
+                <ContainerContent>
                     <h1>
                         <TranslatableText dictionary={{
                                 en: "Quiz",
                                 fr: "Quiz FR" }}>
                         </TranslatableText> 
                     </h1>
-               </ContainerContent>
+                </ContainerContent>
 
-               <ContainerContent addClass="quiz">
-                        <span>Question {(this.state.questionCount + 1)} of {this.state.questionsTotal}</span>
-                    <span className="question-count">{(this.state.questionCount + 1).toString()}</span>
+                <ContainerContent addClass="quiz-wrap">
 
-                    <Question content={question} />
+                    <TransitionGroup  className={`transition-group `}>
+                        <CSSTransition
+                            key={this.state.questionCount}
+                            timeout={{ enter: 800, exit: 400 }}
+                            classNames={'transition-wrap'} 
+                        >
+                            <div>
+                                <span>Question {(this.state.questionCount + 1)} of {this.state.questionsTotal}</span>
+                                <span className="question-count">{(this.state.questionCount + 1).toString()}</span>
 
-                    <AnswerOptions answers={questions[questionCount].answers} onAnswerSelected={this.onAnswerSelected} />
+                                <Question content={question} />
+
+                                <AnswerOptions answers={questions[questionCount].answers} onAnswerSelected={this.onAnswerSelected} />
+
+                            </div>
+                        </CSSTransition>
+                    </TransitionGroup>
                    
-
                </ContainerContent>
             </Wrapper>
         )
