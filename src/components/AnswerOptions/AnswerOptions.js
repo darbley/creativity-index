@@ -9,6 +9,7 @@ const AnswerOptions = (props) => {
            
             <li className="answerOption" key={key}>
                 <input
+                    id={value}
                     type="radio"
                     className="radioCustomButton"
                     name="radioGroup"
