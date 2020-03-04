@@ -1,7 +1,9 @@
 @import '../../assets/scss/partials/vars';
 
 ul.answer-options{
-    display: block;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     list-style-type: none;
     width: 100%;
     max-width: 500px;
@@ -10,6 +12,31 @@ ul.answer-options{
     li{
         margin: 5px 0;
         text-align: left;
+    }
+
+    li input[type="radio"] {
+        position: fixed;
+        width: 0;
+        opacity: 0;       
+    }
+
+    li label {
+        display: inline-block;
+        background-color: #ddd;
+        padding: 10px 20px;
+        font-family: sans-serif, Arial;
+        font-size: 16px;
+        border: 2px solid #444;
+        border-radius: 4px;
+    }
+
+    li input[type="radio"]:checked + label {
+        background-color:#bfb;
+        border-color: #4c4;
+    }
+
+    li input[type="radio"]:focus + label {
+        border: 2px dashed #444;
     }
 
 }
