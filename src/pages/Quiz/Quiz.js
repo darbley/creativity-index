@@ -9,6 +9,7 @@ import ContainerContent from '../../templates/ContainerContent/ContainerContent'
 import data from '../../data.json';
 import Question from '../../components/Question/Question';
 import AnswerOptions from '../../components/AnswerOptions/AnswerOptions';
+import QuizResults from '../../components/QuizResults/QuizResults';
 
 class Quiz extends React.Component {
     state = { 
@@ -29,31 +30,48 @@ class Quiz extends React.Component {
     }
 
     onAnswerSelected = (event, key) => {
+        const { questionCount } = this.state;
         console.log('clicked on answer ',key);
+        
+        // Grab current answer
+        let currentAnswer = this.state.questions[questionCount].correct_answer;
+        // Check to see if value of answer is correct
+        
+        if(key === currentAnswer){
+            console.log('correct');
+            this.setState({
+                quizScore: this.state.quizScore + 1
+            })
+        }
+        
         // Increment questionCount
         this.setState((prevState) => {
             return {
                 questionCount: this.state.questionCount + 1
             }
         })
-        // Check to see if value of answer is correct
-
-        // If correct add to quizScore
+       
 
     }
 
    
 
     render() {
-        const { questions, questionCount } = this.state;
+        const { questions, questionCount, questionsTotal } = this.state;
+        console.log('q total ',questionCount);
+
+        // If questions count is higher than questions.length -> show end screen
+        if(questionCount !== 0 && questionCount >= questionsTotal){
+            return (
+                 
+                <QuizResults score={this.state.quizScore} />
+            )
+        } 
+
         const question = questions[questionCount].question;
         const answers = Object.values(questions[questionCount].answers);
-        /* const List = Object.entries(questions[questionCount].answers).map(([key,value])=>{
-            return (
-                <div>{key} : {value.toString()}</div>
-            )
-          }) */
-        console.log('const ',questions);
+       
+        //console.log('const ',questions);
         return (
             <Wrapper pageCurrent="quiz">
                 <ContainerContent>
@@ -74,8 +92,9 @@ class Quiz extends React.Component {
                             classNames={'transition-wrap'} 
                         >
                             <div>
-                                <span>Question {(this.state.questionCount + 1)} of {this.state.questionsTotal}</span>
-                                <span className="question-count">{(this.state.questionCount + 1).toString()}</span>
+                                <span>Score: {this.state.quizScore}</span>
+                                <span>Question {(this.state.questionCount) + 1} of {this.state.questionsTotal}</span>
+                                <span className="question-count">{(this.state.questionCount).toString()}</span>
 
                                 <Question content={question} />
 
@@ -88,6 +107,7 @@ class Quiz extends React.Component {
                </ContainerContent>
             </Wrapper>
         )
+    
     }
 }
 export default Quiz;
