@@ -1,8 +1,8 @@
 @import '../../assets/scss/partials/vars';
 
-.question{
-    h2 {
-        font-family: $baseFont;
-        font-size: 2rem;
-    }
+
+h2.question {
+    font-family: $baseFont;
+    font-size: 2rem;
+    margin: 10px auto;
 }

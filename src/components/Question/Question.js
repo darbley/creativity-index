@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './style.scss';
 
 const Question = (props) => (
-    <h2>{props.content}</h2>
+    <h2 className="question">{props.content}</h2>
 )
 export default Question;
 
